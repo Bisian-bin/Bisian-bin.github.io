@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title></title>
+    <url>/2023/09/20/01%E5%88%9D%E8%AF%86Vue/</url>
+    <content><![CDATA[<p>title:初识Vue</p>
+<h1 id="01-【Vue简介-初识Vue-模板语法和数据绑定】"><a href="#01-【Vue简介-初识Vue-模板语法和数据绑定】" class="headerlink" title="01 【Vue简介 初识Vue 模板语法和数据绑定】"></a>01 【Vue简介 初识Vue 模板语法和数据绑定】</h1><h2 id="1-Vue简介"><a href="#1-Vue简介" class="headerlink" title="1.Vue简介"></a>1.Vue简介</h2><h3 id="1-1官网"><a href="#1-1官网" class="headerlink" title="1.1官网"></a>1.1官网</h3><ul>
+<li><a href="https://vuejs.org/">英文官网</a></li>
+<li><a href="https://cn.vuejs.org/">中文官网</a></li>
+</ul>
+<h3 id="1-2介绍与描述"><a href="#1-2介绍与描述" class="headerlink" title="1.2介绍与描述"></a>1.2介绍与描述</h3><ul>
+<li><p>Vue 是一套用来动态构建用户界面的渐进式JavaScript框架<br>○构建用户界面：把数据通过某种办法变成用户界面<br>○渐进式：Vue可以自底向上逐层的应用，简单应用只需要一个轻量小巧的核心库，复杂应用可以引入各式各样的Vue插件</p>
+<span id="more"></span>
+</li>
+<li><p>作者：尤雨溪</p>
+</li>
+</ul>
+<p><img data-src="https://i0.hdslb.com/bfs/album/a480928cc5819344850462e511b11481f773c4e3.png" alt="image-20220627111824089"></p>
+<h3 id="1-3-Vue-的特点"><a href="#1-3-Vue-的特点" class="headerlink" title="1.3. Vue 的特点"></a>1.3. Vue 的特点</h3><p>1 遵循MVVM模式<br>2 编码简洁，体积小，运行效率高，适合移动&#x2F;PC端开发<br>3 它本身只关注 UI，可以引入其它第三方库开发项目<br>4采用<code>组件化</code>模式，提高代码复用率、且让代码更好维护</p>
+<p><img data-src="https://i0.hdslb.com/bfs/album/911d5825fb775e5d72a180e14cf91cd4150b7d6f.png" alt="image-20220627112112058"></p>
+<p>5 <code>声明式</code>编码，让编码人员无需直接操作DOM，提高开发效率</p>
+<p><img data-src="https://i0.hdslb.com/bfs/album/84f52ac120ac699f8e9e2d5b777359e90545dd3a.png" alt="image-20220627112141707"></p>
+<p>使用<code>虚拟DOM</code> 和 <code>Diff算法</code>，尽量复用DOM节点</p>
+<p><img data-src="https://i0.hdslb.com/bfs/album/a28b2b5307e90c92fd36bbad151869b7dbc481ce.png" alt="image-20220627112235934"></p>
+<h3 id="1-4与其他-JS-框架的关联"><a href="#1-4与其他-JS-框架的关联" class="headerlink" title="1.4与其他 JS 框架的关联"></a>1.4与其他 JS 框架的关联</h3><ul>
+<li>借鉴 angular 的 <strong>模板</strong> 和 <strong>数据绑定</strong> 技术</li>
+<li>借鉴 react 的 <strong>组件化</strong> 和 <strong>虚拟DOM</strong> 技术</li>
+</ul>
+<h3 id="1-5Vue-周边库"><a href="#1-5Vue-周边库" class="headerlink" title="1.5Vue 周边库"></a>1.5Vue 周边库</h3><ul>
+<li>vue-cli：vue 脚手架</li>
+<li>vue-router：路由</li>
+<li>vuex：状态管理（它是 vue 的插件但是没有用 vue-xxx 的命名规则）</li>
+<li>vue-lazyload：图片懒加载</li>
+<li>vue-scroller：页面滑动相关</li>
+<li>mint-ui：基于 vue 的 UI 组件库（移动端）</li>
+<li>element-ui：基于 vue 的 UI 组件库（PC 端）</li>
+</ul>
+<h2 id="2-初识Vue"><a href="#2-初识Vue" class="headerlink" title="2.初识Vue"></a>2.初识Vue</h2><p><strong>前置工作</strong></p>
+<ol>
+<li>给浏览器安装 <a href="https://cn.vuejs.org/v2/guide/installation.html#Vue-Devtools">Vue Devtools</a> 插件</li>
+<li>标签引入Vue包</li>
+<li>（可选）阻止vue在启动时生成生产提示<code>Vue.config.productionTip = false</code></li>
+<li>favicon 需要将页签图标放在项目根路径，重新打开就有了（shfit+F5 强制刷新）</li>
+</ol>
+<p><strong>初识Vue</strong></p>
+<ol>
+<li>想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象</li>
+<li>root 容器里的代码依然符合html规范，只不过混入了一些特殊的Vue语法</li>
+<li>root 容器里的代码被称为Vue模板</li>
+<li>Vue 实例与容器是<code>一一对应</code>的</li>
+<li>真实开发中只有一个Vue实例，并且会配合着组件一起使用</li>
+<li><code>&#123;&#123;xxx&#125;&#125;</code>中的 xxx 要写<code> js 表达式</code>，且 xxx 可以自动读取到data中的所有属性<br>  <strong>注意区分</strong>：js 表达式 和 js代码（语句）<ol>
+<li>表达式：一个表达式会产生一个值，可以放在任何一个需要值的地方<br>a	a+b		demo(1)		x &#x3D;&#x3D;&#x3D; y ? ‘a’ : ‘b’</li>
+<li>js代码（语句）<br>if(){}		for(){}</li>
+</ol>
+</li>
+<li>一旦data中的数据发生变化，那么模板中用到该数据的地方也会自动更新(Vue实现的响应式)</li>
+</ol>
+<blockquote>
+<p>初始示例代码</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">    <span class="comment">&lt;!-- 引入Vue --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;../js/vue.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 准备好一个容器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;demo&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello，&#123;&#123;name.toUpperCase()&#125;&#125;，&#123;&#123;address&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> &gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">	<span class="title class_">Vue</span>.<span class="property">config</span>.<span class="property">productionTip</span> = <span class="literal">false</span> <span class="comment">//阻止 vue 在启动时生成生产提示。</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">	<span class="comment">//创建Vue实例</span></span></span><br><span class="line"><span class="language-javascript">	<span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">		<span class="attr">el</span>:<span class="string">&#x27;#demo&#x27;</span>, <span class="comment">//el用于指定当前Vue实例为哪个容器服务，值通常为css选择器字符串。</span></span></span><br><span class="line"><span class="language-javascript">		<span class="attr">data</span>:&#123; <span class="comment">//data中用于存储数据，数据供el所指定的容器去使用，值我们暂时先写成一个对象。</span></span></span><br><span class="line"><span class="language-javascript">			<span class="attr">name</span>:<span class="string">&#x27;hello,world&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">			<span class="attr">address</span>:<span class="string">&#x27;北京&#x27;</span></span></span><br><span class="line"><span class="language-javascript">		&#125;</span></span><br><span class="line"><span class="language-javascript">	&#125;);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-模板语法和数据绑定"><a href="#3-模板语法和数据绑定" class="headerlink" title="3.模板语法和数据绑定"></a>3.模板语法和数据绑定</h2><h3 id="3-1模板语法"><a href="#3-1模板语法" class="headerlink" title="3.1模板语法"></a>3.1模板语法</h3><p><code>Vue</code>模板语法有2大类:</p>
+<ul>
+<li><p><strong>插值语法：</strong></p>
+<p>功能：用于解析标签体内容</p>
+<p>写法：<code>&#123;&#123;xxx&#125;&#125;</code>，xxx是<strong>js表达式</strong>，且可以直接读取到data中的所有属性</p>
+</li>
+<li><p><strong>指令语法:</strong></p>
+<p>功能：用于解析标签（包括：标签属性、标签体内容、绑定事件…..）</p>
+<p>举例：<code>v-bind:href=&quot;xxx&quot;</code> 或  简写为 <code>:href=&quot;xxx&quot;</code>，xxx同样要写<code>js表达式</code>，且可以直接读取到data中的所有属性</p>
+<p>备注：Vue中有很多的指令，且形式都是 <strong>v-xxx</strong>，此处只是拿v-bind举例</p>
+</li>
+</ul>
+<blockquote>
+<p>代码</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;root&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>插值语法<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h4</span>&gt;</span>你好，&#123;&#123; name &#125;&#125;<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">hr</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>指令语法<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">v-bind:href</span>=<span class="string">&quot;tencent.url.toUpperCase()&quot;</span> <span class="attr">x</span>=<span class="string">&quot;hello&quot;</span>&gt;</span>点我去看&#123;&#123; tencent.name &#125;&#125;1<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">:href</span>=<span class="string">&quot;tencent.url&quot;</span> <span class="attr">x</span>=<span class="string">&quot;hello&quot;</span>&gt;</span>点我去看&#123;&#123; tencent.name &#125;&#125;2<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="attr">el</span>: <span class="string">&#x27;#root&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">    <span class="attr">data</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">name</span>: <span class="string">&#x27;jack&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">tencent</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">name</span>: <span class="string">&#x27;开端&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">url</span>: <span class="string">&#x27;https://v.qq.com/x/cover/mzc00200mp8vo9b/n0041aa087e.html&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">      &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">  &#125;)</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img data-src="https://i0.hdslb.com/bfs/album/39acee45f25c6e31959ae833c1f9d55cb08bc896.png" alt="image-20220627113847858"></p>
+<h3 id="3-2数据绑定"><a href="#3-2数据绑定" class="headerlink" title="3.2数据绑定"></a>3.2数据绑定</h3><p>Vue中有2种数据绑定的方式：</p>
+<ul>
+<li><p>单向绑定<code>(v-bind)</code>：数据只能从data流向页面</p>
+</li>
+<li><p>双向绑定<code>(v-model)</code>：数据不仅能从data流向页面，还可以从页面流向data</p>
+<blockquote>
+<p>tips: </p>
+<p>1.双向绑定一般都应用在<strong>表单类元素</strong>上（如：<code>input</code>、<code>select</code>等）</p>
+<p>2.<strong>v-model:value</strong> 可以简写为<code> v-model</code>，因为v-model默认收集的就是value值</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>代码</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;root&quot;</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 普通写法 单向数据绑定 --&gt;</span></span><br><span class="line">    单向数据绑定：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">v-bind:value</span>=<span class="string">&quot;name&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">    双向数据绑定：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">v-model:value</span>=<span class="string">&quot;name&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!-- 简写 v-model:value 可以简写为 v-model，因为v-model默认收集的就是value值--&gt;</span></span><br><span class="line">    单向数据绑定：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">:value</span>=<span class="string">&quot;name&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">    双向数据绑定：<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;name&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!-- 如下代码是错误的，因为 v-model 只能应用在表单类元素（输入类元素）上 --&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- &lt;h2 v-model:x=&quot;name&quot;&gt;你好啊&lt;/h2&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">		<span class="attr">el</span>:<span class="string">&#x27;#root&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">		<span class="attr">data</span>:&#123;</span></span><br><span class="line"><span class="language-javascript">			<span class="attr">name</span>:<span class="string">&#x27;jack&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">	&#125;)</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2023/09/19/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+</search>
